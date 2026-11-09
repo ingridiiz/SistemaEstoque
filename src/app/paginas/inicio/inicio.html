@@ -1,0 +1,51 @@
+<div class="pagina">
+  <header class="cabecalho">
+    <div>
+      <h1>Sistema de Estoque</h1>
+      <p>Controle de estoque da loja</p>
+    </div>
+    <button type="button" class="btn btn-sec" (click)="sair()">Sair</button>
+  </header>
+
+  <main>
+    <section class="boas-vindas">
+      <h2>Bem-vinda ao Sistema de Estoque!</h2>
+      <p>Gerencie seu estoque de forma eficiente e organizada.</p>
+    </section>
+
+    @if (erro()) {
+      <div class="erros">{{ erro() }}</div>
+    }
+
+    <section class="resumo">
+      <article class="cartao">
+        <span>Total de produtos</span>
+        <strong>{{ relatorio()?.totalProdutos ?? '-' }}</strong>
+        <p>Produtos cadastrados</p>
+      </article>
+
+      <article class="cartao">
+        <span>Estoque baixo</span>
+        <strong>{{ relatorio()?.estoqueBaixo ?? '-' }}</strong>
+        <p>Produtos para repor</p>
+      </article>
+
+      <article class="cartao">
+        <span>Valor em estoque</span>
+        <strong>{{ relatorio() ? (relatorio()!.valorTotal | currency: 'BRL') : '-' }}</strong>
+        <p>Valor total dos produtos</p>
+      </article>
+    </section>
+
+    <section class="produtos">
+      <div>
+        <h2>Gerenciar</h2>
+        <p>Acesse as telas do sistema.</p>
+      </div>
+      <div class="botoes">
+        <a class="btn" routerLink="/produtos">Produtos</a>
+        <a class="btn btn-sec" routerLink="/categorias">Categorias e produtos</a>
+      </div>
+    </section>
+  </main>
+</div>

@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="topo">
+    <h1>Produtos</h1>
+    <div class="botoes">
+      <a class="btn btn-sec" routerLink="/">Voltar</a>
+      <a class="btn" routerLink="/produtos/novo">+ Adicionar produto</a>
+    </div>
+  </div>
+
+  @if (erros().length) {
+    <div class="erros">
+      <ul>
+        @for (m of erros(); track m) {
+          <li>{{ m }}</li>
+        }
+      </ul>
+    </div>
+  }
+
+  <table>
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Categoria</th>
+        <th>Preço</th>
+        <th>Quantidade</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (p of produtos(); track p.id) {
+        <tr>
+          <td>{{ p.nome }}</td>
+          <td>{{ nomeCategoria(p.categoriaId) }}</td>
+          <td>{{ p.preco | currency: 'BRL' }}</td>
+          <td>{{ p.quantidade }}</td>
+          <td>
+            <div class="acoes">
+              <a class="btn btn-sec" [routerLink]="['/produtos', p.id, 'editar']">Editar</a>
+              <button type="button" class="btn btn-perigo" (click)="excluir(p)">Excluir</button>
+            </div>
+          </td>
+        </tr>
+      } @empty {
+        <tr><td colspan="5" class="vazio">Nenhum produto cadastrado.</td></tr>
+      }
+    </tbody>
+  </table>
+</div>

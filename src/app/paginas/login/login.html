@@ -1,0 +1,24 @@
+<div class="tela-login">
+  <form class="caixa" #f="ngForm" (ngSubmit)="entrar()">
+    <h1>Sistema de Estoque</h1>
+    <p>Entre para continuar</p>
+
+    <label>
+      Login
+      <input name="login" [(ngModel)]="login" required autocomplete="username" />
+    </label>
+
+    <label>
+      Senha
+      <input name="senha" type="password" [(ngModel)]="senha" required autocomplete="current-password" />
+    </label>
+
+    @if (erro()) {
+      <p class="erro">{{ erro() }}</p>
+    }
+
+    <button type="submit" [disabled]="f.invalid || carregando()">
+      {{ carregando() ? 'Entrando...' : 'Entrar' }}
+    </button>
+  </form>
+</div>

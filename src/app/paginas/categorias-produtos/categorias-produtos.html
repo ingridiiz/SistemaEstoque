@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="topo">
+    <h1>Categorias e seus produtos</h1>
+    <a class="btn btn-sec" routerLink="/">Voltar</a>
+  </div>
+
+  @if (erros().length) {
+    <div class="erros">
+      <ul>
+        @for (m of erros(); track m) {
+          <li>{{ m }}</li>
+        }
+      </ul>
+    </div>
+  }
+
+  @for (c of categorias(); track c.id) {
+    <section class="grupo">
+      <h2>{{ c.nome }} ({{ produtosDa(c.id).length }})</h2>
+      @if (produtosDa(c.id).length) {
+        <table>
+          <thead>
+            <tr><th>Produto</th><th>Preço</th><th>Quantidade</th></tr>
+          </thead>
+          <tbody>
+            @for (p of produtosDa(c.id); track p.id) {
+              <tr>
+                <td>{{ p.nome }}</td>
+                <td>{{ p.preco | currency: 'BRL' }}</td>
+                <td>{{ p.quantidade }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      } @else {
+        <p class="vazio">Nenhum produto nesta categoria.</p>
+      }
+    </section>
+  } @empty {
+    <p class="vazio">Nenhuma categoria cadastrada.</p>
+  }
+</div>
